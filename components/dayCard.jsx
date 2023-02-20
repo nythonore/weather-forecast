@@ -44,7 +44,11 @@ export default function DayCard({ index, units, daily, activeWeather }) {
 
 	return (
 		<Card
-			sx={{ width: 1, background: isActive ? '#eee' : '#fff' }}
+			sx={{
+				width: 1,
+				background: isActive ? '#eee' : '#fff',
+				cursor: 'pointer',
+			}}
 			onClick={() => dispatch(setWeather(data))}
 		>
 			<CardContent>

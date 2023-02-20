@@ -15,46 +15,54 @@ export default function WeatherOverview() {
 	});
 
 	return (
-		status === 'succeeded' && (
-			<>
-				<Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
-					{forecast.daily.time.map((_, key) => (
-						<DayCard
-							key={key}
-							index={key}
-							units={forecast.daily_units}
-							daily={forecast.daily}
-							activeWeather={weather}
-						/>
-					))}
-				</Stack>
+		<>
+			{status === 'loading' && <Typography>Loading ...</Typography>}
 
-				{weather && (
-					<div style={{ marginTop: 20 }}>
-						<Box display='flex' gap={1}>
-							<CloudOutlinedIcon />
+			{status === 'succeeded' && (
+				<>
+					<Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
+						{forecast.daily.time.map((_, key) => (
+							<DayCard
+								key={key}
+								index={key}
+								units={forecast.daily_units}
+								daily={forecast.daily}
+								activeWeather={weather}
+							/>
+						))}
+					</Stack>
 
-							<Typography sx={{ fontSize: 18, fontWeight: '550' }} gutterBottom>
-								Weather
-							</Typography>
-						</Box>
+					{weather && (
+						<div style={{ marginTop: 20 }}>
+							<Box display='flex' gap={1}>
+								<CloudOutlinedIcon />
 
-						<div>
-							<Typography>
-								Precipitation:{' '}
-								{`${weather.precipitation.value}${weather.precipitation.unit}`}
-							</Typography>
-							<Typography>
-								Snowfall: {`${weather.snowfall.value}${weather.snowfall.unit}`}
-							</Typography>
-							<Typography>
-								windspeed:{' '}
-								{`${weather.windspeed.value}${weather.windspeed.unit}`}
-							</Typography>
+								<Typography
+									sx={{ fontSize: 18, fontWeight: '550' }}
+									gutterBottom
+								>
+									Weather
+								</Typography>
+							</Box>
+
+							<div>
+								<Typography>
+									Precipitation:{' '}
+									{`${weather.precipitation.value}${weather.precipitation.unit}`}
+								</Typography>
+								<Typography>
+									Snowfall:{' '}
+									{`${weather.snowfall.value}${weather.snowfall.unit}`}
+								</Typography>
+								<Typography>
+									windspeed:{' '}
+									{`${weather.windspeed.value}${weather.windspeed.unit}`}
+								</Typography>
+							</div>
 						</div>
-					</div>
-				)}
-			</>
-		)
+					)}
+				</>
+			)}
+		</>
 	);
 }
